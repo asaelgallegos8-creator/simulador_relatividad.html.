@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Relatividad - Viajero Relativista</title>
+    <style>
+        /* Estilos CSS */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0d1a26;
+            color: #e0f7fa;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 900px;
+            background-color: #1e3650;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 191, 255, 0.5);
+        }
+        h1 {
+            color: #00bfff;
+            text-align: center;
+            border-bottom: 2px solid #00bfff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #8aff8a;
+            margin-top: 20px;
+        }
+        .control-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #2c4763;
+            border-radius: 8px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 8px;
+            background: #4a6fa5;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #00bfff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px #00bfff;
+        }
+        .results {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            border-top: 1px dashed #4a6fa5;
+            padding-top: 20px;
+        }
+        .result-box {
+            background-color: #0d1a26;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px;
+            flex: 1 1 40%;
+            min-width: 200px;
+            text-align: center;
+        }
+        .result-box h3 {
+            margin-top: 0;
+            color: #f0f0f0;
+        }
+        .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #8aff8a;
+        }
+        .unit {
+            font-size: 1.2em;
+            color: #00bfff;
+        }
+        .explanation {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #00bfff20;
+            border-left: 5px solid #00bfff;
+        }
+        /* Estilo para las fórmulas LaTeX */
+        .latex-formula {
+            display: block;
+            text-align: center;
+            font-style: italic;
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 Viajero Relativista - Simulador de Dilatación del Tiempo</h1>
+    <p>Experimenta cómo el tiempo y la distancia cambian cuando viajas a velocidades cercanas a la luz, según la **Teoría de la Relatividad Especial** de Einstein.</p>
+
+    <div class="control-group">
+        <label for="velocity">Velocidad de la Nave ($v$):</label>
+        <input type="range" id="velocity" min="0" max="0.9999" step="0.0001" value="0.866">
+        <p>Velocidad: <span id="v-display">0.866</span> $c$ (donde $c$ es la velocidad de la luz)</p>
+    </div>
+
+    <div class="control-group">
+        <label for="time_earth">Tiempo de Viaje (Observador en la Tierra - $\Delta t$):</label>
+        <input type="range" id="time_earth" min="1" max="100" step="1" value="10">
+        <p>Tiempo en la Tierra: <span id="t-earth-display">10</span> años</p>
+    </div>
+
+    <h2>Resultados de la Relatividad</h2>
+    <div class="results">
+        <div class="result-box">
+            <h3>⏳ Tiempo Pasado para el Viajero ($\Delta t'$)</h3>
+            <div class="value" id="time-traveller">5.00</div>
+            <div class="unit">años</div>
+        </div>
+        <div class="result-box">
+            <h3>📏 Longitud del Viaje Percibida ($L'$)</h3>
+            <div class="value" id="length-contracted">5.00</div>
+            <div class="unit">Años Luz</div>
+        </div>
+    </div>
+
+    <div class="explanation">
+        <h2>💡 ¿Qué ha pasado? (Explicación)</h2>
+        <p>Al moverte a una velocidad **$v$** cercana a la luz, el tiempo para ti (el viajero) se **dilata** respecto al observador en la Tierra. El factor de cambio se llama factor de Lorentz ($\gamma$):</p>
+        <span class="latex-formula">$\gamma = \frac{1}{\sqrt{1 - v^2/c^2}}$</span>
+        <p>
+            En este caso, tu velocidad es $\mathbf{v =}$ <span id="exp-v">0.866</span> $\mathbf{c}$. El **factor de Lorentz ($\gamma$)** es: <span id="exp-gamma" style="color:#00bfff;">2.00</span>.
+        </p>
+        <ul>
+            <li>**Dilatación del Tiempo:** El tiempo en la nave ($\Delta t'$) es $\Delta t / \gamma$. Si $\Delta t = 10$ años y $\gamma = 2$, solo sientes 5 años.</li>
+            <li>**Contracción de la Longitud:** La distancia del viaje para ti ($\Delta L'$) es $\Delta L / \gamma$. Los 10 Años Luz se acortan a 5 Años Luz. **¡Viajas menos distancia en menos tiempo!**</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // Lógica JavaScript
+    const c = 299792458; // Velocidad de la luz en m/s (como referencia)
+    const velocitySlider = document.getElementById('velocity');
+    const timeEarthSlider = document.getElementById('time_earth');
+    
+    const vDisplay = document.getElementById('v-display');
+    const tEarthDisplay = document.getElementById('t-earth-display');
+    const timeTraveller = document.getElementById('time-traveller');
+    const lengthContracted = document.getElementById('length-contracted');
+    const expV = document.getElementById('exp-v');
+    const expGamma = document.getElementById('exp-gamma');
+
+    function calculateRelativity() {
+        // Obtenemos los valores de los sliders
+        const v_ratio = parseFloat(velocitySlider.value); // v/c
+        const delta_t_earth = parseFloat(timeEarthSlider.value); // Tiempo en la Tierra (años)
+        
+        // 1. Cálculo del Factor de Lorentz (gamma)
+        // gamma = 1 / sqrt(1 - (v/c)^2)
+        const v_squared_over_c_squared = v_ratio * v_ratio;
+        // Evitar división por cero o raíz de número negativo (cercano a 1)
+        let gamma;
+        if (v_squared_over_c_squared >= 1) {
+             gamma = 10000; // Valor máximo para evitar errores con 0.9999
+        } else {
+             gamma = 1 / Math.sqrt(1 - v_squared_over_c_squared);
+        }
+        
+        // 2. Dilatación del Tiempo
+        // delta_t' = delta_t / gamma
+        const delta_t_traveller = delta_t_earth / gamma;
+
+        // 3. Contracción de la Longitud
+        // L_rest se mide en Años Luz, igual al tiempo en la Tierra si v=c
+        const L_rest = delta_t_earth * v_ratio; // Distancia recorrida por la nave vista desde la Tierra (años luz)
+        // L' = L / gamma
+        const L_contracted = L_rest / gamma;
+
+        // 4. Actualizar la Interfaz
+        
+        // Mostrar valores de control
+        vDisplay.textContent = v_ratio.toFixed(4);
+        tEarthDisplay.textContent = delta_t_earth.toFixed(0);
+        
+        // Mostrar resultados
+        timeTraveller.textContent = delta_t_traveller.toFixed(2);
+        lengthContracted.textContent = L_contracted.toFixed(2);
+        
+        // Actualizar explicación
+        expV.textContent = v_ratio.toFixed(4);
+        expGamma.textContent = gamma.toFixed(2);
+    }
+
+    // Inicializar el simulador y añadir escuchadores de eventos
+    calculateRelativity(); // Calcular al cargar
+    velocitySlider.addEventListener('input', calculateRelativity);
+    timeEarthSlider.addEventListener('input', calculateRelativity);
+</script>
+
+</body>
+</html>
